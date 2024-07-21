@@ -4,8 +4,13 @@ const {body,validationResult}=require('express-validator');
 const bcrypt=require('bcryptjs');
 const jwt=require('jsonwebtoken');
 const fetchItem=require('../middleware/fetchItem');
+require('dotenv').config();
 
 const jwt_secret=process.env.JWT_SECRET;
+if (!jwt_secret) {
+    console.error('JWT_SECRET environment variable not set.');
+    process.exit(1);
+  }
 //signup
 const router=express.Router();
 router.post('/seller/signup',[
